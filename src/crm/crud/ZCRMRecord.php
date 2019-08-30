@@ -18,126 +18,126 @@ use zcrmsdk\crm\utility\APIConstants;
  */
 class ZCRMRecord
 {
-    
+
     /**
      * the record id
      *
      * @var string
      */
     private $entityId = null;
-    
+
     /**
      * api name of the module
      *
      * @var String
      */
     private $moduleApiName = null;
-    
+
     /**
      * the inventory item list
      *
      * @var array
      */
     private $lineItems = array();
-    
+
     /**
      * the lookup label
      *
      * @var String
      */
     private $lookupLabel = null;
-    
+
     /**
      * the owner of the record
      *
      * @var ZCRMUser
      */
     private $owner = null;
-    
+
     /**
      * the user who created the record
      *
      * @var ZCRMUser
      */
     private $createdBy = null;
-    
+
     /**
      * the user who modified the record
      *
      * @var ZCRMUser
      */
     private $modifiedBy = null;
-    
+
     /**
      * creation time of the record
      *
      * @var String
      */
     private $createdTime = null;
-    
+
     /**
      * modification time of the record
      *
      * @var String
      */
     private $modifiedTime = null;
-    
+
     /**
      * the record data
      *
      * @var array
      */
     private $fieldNameVsValue = array();
-    
+
     /**
      * properties of the record
      *
      * @var array
      */
     private $properties = array();
-    
+
     /**
      * participants in the record
      *
      * @var array
      */
     private $participants = array();
-    
+
     /**
      * price detail of the product
      *
      * @var array
      */
     private $priceDetails = array();
-    
+
     /**
      * layout of the record
      *
      * @var String
      */
     private $layout = null;
-    
+
     /**
      * the list of tax
      *
      * @var array ZCRMTax class instances array
      */
     private $taxList = array();
-    
+
     /**
      * the time of the last activity done on the record
      *
      * @var String
      */
     private $lastActivityTime = null;
-    
+
     /**
      * list of all the tags
      *
      * @var array
      */
     private $tags = array();
-    
+
     /**
      * constructor to set the module name and record id
      *
@@ -149,7 +149,7 @@ class ZCRMRecord
         $this->moduleApiName = $module;
         $this->entityId = $entityId;
     }
-    
+
     /**
      * Method to get the instance of the ZCRMRecord class
      *
@@ -161,7 +161,7 @@ class ZCRMRecord
     {
         return new ZCRMRecord($module, $entityId);
     }
-    
+
     /**
      * Method inserts the tax associated to the record
      *
@@ -171,7 +171,7 @@ class ZCRMRecord
     {
         array_push($this->taxList, $taxIns);
     }
-    
+
     /**
      * Method to get the tax associated to the record
      *
@@ -181,7 +181,7 @@ class ZCRMRecord
     {
         return $this->taxList;
     }
-    
+
     /**
      * Method to get the record id
      *
@@ -191,7 +191,7 @@ class ZCRMRecord
     {
         return $this->entityId;
     }
-    
+
     /**
      * Method to set the record id
      *
@@ -201,7 +201,7 @@ class ZCRMRecord
     {
         $this->entityId = $entityId;
     }
-    
+
     /**
      * Method to get the module api name of that record
      *
@@ -211,7 +211,7 @@ class ZCRMRecord
     {
         return $this->moduleApiName;
     }
-    
+
     /**
      * Method to set the module api name of the record
      *
@@ -221,7 +221,7 @@ class ZCRMRecord
     {
         $this->moduleApiName = $moduleApiName;
     }
-    
+
     /**
      * Method to get the field value by api name of the field of the record
      *
@@ -232,18 +232,18 @@ class ZCRMRecord
     {
         return $this->fieldNameVsValue[$apiName];
     }
-    
+
     /**
      * Method to set the field value by api name of the field of the record
      *
      * @param String $apiName api name of the field
-     * @param String $value value of the field (the value must be of the same datatype of the field. Ex. "val1", 10, 200.56, true)
+     * @param String|array $value value of the field (the value must be of the same datatype of the field. Ex. "val1", 10, 200.56, true)
      */
     public function setFieldValue($apiName, $value)
     {
         $this->fieldNameVsValue[$apiName] = $value;
     }
-    
+
     /**
      * Method to get an array(key-value pair) containing field name as key and field data as value for the record
      *
@@ -253,7 +253,7 @@ class ZCRMRecord
     {
         return $this->fieldNameVsValue;
     }
-    
+
     /**
      * Method to get the line items of the inventory record
      *
@@ -263,7 +263,7 @@ class ZCRMRecord
     {
         return $this->lineItems;
     }
-    
+
     /**
      * Method adds the line item to the inventory record
      *
@@ -284,7 +284,7 @@ class ZCRMRecord
         self::removeLineItem($updatedlineItem->getId());
         array_push($this->lineItems, $updatedlineItem);
     }
-    
+
     /**
      * Method removes the line item from the inventory record
      *
@@ -304,7 +304,7 @@ class ZCRMRecord
             throw new ZCRMException("Line item with such id doesn't exist");
         }
     }
-    
+
     /**
      * Method to add Line item to existing record
      *
@@ -316,7 +316,7 @@ class ZCRMRecord
         $recordinstance->addLineItem($lineItem);
         return $recordinstance->update();
     }
-    
+
     /**
      * Method to update Line item from the existing record
      *
@@ -340,8 +340,8 @@ class ZCRMRecord
         $recordinstance->removeLineItem($lineItemId);
         return $recordinstance->update();
     }
-    
-    
+
+
     /**
      * Method to get the lookup label of the record
      *
@@ -351,7 +351,7 @@ class ZCRMRecord
     {
         return $this->lookupLabel;
     }
-    
+
     /**
      * Method to set the lookup label for the record
      *
@@ -361,7 +361,7 @@ class ZCRMRecord
     {
         $this->lookupLabel = $lookupLabel;
     }
-    
+
     /**
      * Method to get the owner of the record
      *
@@ -371,7 +371,7 @@ class ZCRMRecord
     {
         return $this->owner;
     }
-    
+
     /**
      * Method to set the owner of the record
      *
@@ -381,7 +381,7 @@ class ZCRMRecord
     {
         $this->owner = $owner;
     }
-    
+
     /**
      * Method to get the creator of that record
      *
@@ -391,7 +391,7 @@ class ZCRMRecord
     {
         return $this->createdBy;
     }
-    
+
     /**
      * Method to set the creator of that record
      *
@@ -401,7 +401,7 @@ class ZCRMRecord
     {
         $this->createdBy = $createdBy;
     }
-    
+
     /**
      * Method to get the user who modified the record
      *
@@ -411,7 +411,7 @@ class ZCRMRecord
     {
         return $this->modifiedBy;
     }
-    
+
     /**
      * Method to set the user who modified the record
      *
@@ -421,7 +421,7 @@ class ZCRMRecord
     {
         $this->modifiedBy = $modifiedBy;
     }
-    
+
     /**
      * Method to get the creation time of the record
      *
@@ -431,7 +431,7 @@ class ZCRMRecord
     {
         return $this->createdTime;
     }
-    
+
     /**
      * Method to set the creation time of the record
      *
@@ -441,7 +441,7 @@ class ZCRMRecord
     {
         $this->createdTime = $createdTime;
     }
-    
+
     /**
      * Method to get the modification time of the record
      *
@@ -451,7 +451,7 @@ class ZCRMRecord
     {
         return $this->modifiedTime;
     }
-    
+
     /**
      * Method to set the modification time of the record
      *
@@ -461,7 +461,7 @@ class ZCRMRecord
     {
         $this->modifiedTime = $modifiedTime;
     }
-    
+
     /**
      * Method to get the tags for the record
      *
@@ -471,7 +471,7 @@ class ZCRMRecord
     {
         return $this->tags;
     }
-    
+
     /**
      * Method to set the tags for the record
      *
@@ -481,7 +481,7 @@ class ZCRMRecord
     {
         $this->tags = $tags;
     }
-    
+
     /**
      * Method creates record
      ** @param string $trigger array of triggers
@@ -499,7 +499,7 @@ class ZCRMRecord
         }
         return EntityAPIHandler::getInstance($this)->createRecord($trigger ,$lar_id);
     }
-    
+
     /**
      * Method to update the records
      ** @param string $trigger array of triggers
@@ -516,7 +516,7 @@ class ZCRMRecord
         }
         return EntityAPIHandler::getInstance($this)->updateRecord($trigger );
     }
-    
+
     /**
      * Method to delete the record
      *
@@ -532,7 +532,7 @@ class ZCRMRecord
         }
         return EntityAPIHandler::getInstance($this)->deleteRecord();
     }
-    
+
     /**
      * Method to convert the record
      *
@@ -544,7 +544,7 @@ class ZCRMRecord
     {
         return EntityAPIHandler::getInstance($this)->convertRecord($potentialRecord, $details);
     }
-    
+
     /**
      * Method to get the RelatedList records
      *
@@ -559,7 +559,7 @@ class ZCRMRecord
     {
         return ZCRMModuleRelation::getInstance($this, $relatedListAPIName)->getRecords($sortByField, $sortOrder, $page, $perPage);
     }
-    
+
     /**
      * Method to get the notes
      *
@@ -573,7 +573,7 @@ class ZCRMRecord
     {
         return ZCRMModuleRelation::getInstance($this, "Notes")->getNotes($sortByField, $sortOrder, $page, $perPage);
     }
-    
+
     /**
      * Method adds the note to the record
      *
@@ -590,7 +590,7 @@ class ZCRMRecord
         }
         return ZCRMModuleRelation::getInstance($this, "Notes")->addNote($zcrmNoteIns);
     }
-    
+
     /**
      * Method to update the note of the reecord
      *
@@ -607,7 +607,7 @@ class ZCRMRecord
         }
         return ZCRMModuleRelation::getInstance($this, "Notes")->updateNote($zcrmNoteIns);
     }
-    
+
     /**
      * Method to delete the note of the record
      *
@@ -624,7 +624,7 @@ class ZCRMRecord
         }
         return ZCRMModuleRelation::getInstance($this, "Notes")->deleteNote($zcrmNoteIns);
     }
-    
+
     /**
      * Method to get the attachments of the record
      *
@@ -636,7 +636,7 @@ class ZCRMRecord
     {
         return ZCRMModuleRelation::getInstance($this, "Attachments")->getAttachments($page, $perPage);
     }
-    
+
     /**
      * Method to upload the attachment to the record
      *
@@ -647,7 +647,7 @@ class ZCRMRecord
     {
         return ZCRMModuleRelation::getInstance($this, "Attachments")->uploadAttachment($filePath);
     }
-    
+
     /**
      * Method to upload the link as the attachment to the record
      *
@@ -658,7 +658,7 @@ class ZCRMRecord
     {
         return ZCRMModuleRelation::getInstance($this, "Attachments")->uploadLinkAsAttachment($attachmentUrl);
     }
-    
+
     /**
      * Method to download the attachment of the record
      *
@@ -669,7 +669,7 @@ class ZCRMRecord
     {
         return ZCRMModuleRelation::getInstance($this, "Attachments")->downloadAttachment($attachmentId);
     }
-    
+
     /**
      * Method to delete the attachment of the record
      *
@@ -680,7 +680,7 @@ class ZCRMRecord
     {
         return ZCRMModuleRelation::getInstance($this, "Attachments")->deleteAttachment($attachmentId);
     }
-    
+
     /**
      * Method to upload a photo to the record
      *
@@ -691,7 +691,7 @@ class ZCRMRecord
     {
         return EntityAPIHandler::getInstance($this)->uploadPhoto($filePath);
     }
-    
+
     /**
      * Method to download the photo of the record
      *
@@ -701,7 +701,7 @@ class ZCRMRecord
     {
         return EntityAPIHandler::getInstance($this)->downloadPhoto();
     }
-    
+
     /**
      * Method to delete the photo of the record
      *
@@ -711,7 +711,7 @@ class ZCRMRecord
     {
         return EntityAPIHandler::getInstance($this)->deletePhoto();
     }
-    
+
     /**
      * Method to relate the record with another record
      *
@@ -722,7 +722,7 @@ class ZCRMRecord
     {
         return ZCRMModuleRelation::getInstance($this, $junctionRecord)->addRelation();
     }
-    
+
     /**
      * Method to delete the relationship between the records
      *
@@ -733,7 +733,7 @@ class ZCRMRecord
     {
         return ZCRMModuleRelation::getInstance($this, $junctionRecord)->removeRelation();
     }
-    
+
     /**
      * Method adds the tag to the record
      *
@@ -754,7 +754,7 @@ class ZCRMRecord
         }
         return TagAPIHandler::getInstance()->addTags($this, $tagNames);
     }
-    
+
     /**
      * Method to remove the tags for the record
      *
@@ -775,7 +775,7 @@ class ZCRMRecord
         }
         return TagAPIHandler::getInstance()->removeTags($this, $tagNames);
     }
-    
+
     /**
      * Method to get the properties of a record
      *
@@ -785,7 +785,7 @@ class ZCRMRecord
     {
         return $this->properties;
     }
-    
+
     /**
      * Method to get the value of the property name of the record
      *
@@ -796,7 +796,7 @@ class ZCRMRecord
     {
         return $this->properties[$propertyName];
     }
-    
+
     /**
      * Method to set the property value to the property name of the record
      *
@@ -807,7 +807,7 @@ class ZCRMRecord
     {
         $this->properties[$key] = $value;
     }
-    
+
     /**
      * method to get the participants of the record
      *
@@ -817,7 +817,7 @@ class ZCRMRecord
     {
         return $this->participants;
     }
-    
+
     /**
      * method to add the participants to the record
      *
@@ -827,7 +827,7 @@ class ZCRMRecord
     {
         array_push($this->participants, $participant);
     }
-    
+
     /**
      * Method to fetch the price details of the record
      *
@@ -837,7 +837,7 @@ class ZCRMRecord
     {
         return $this->priceDetails;
     }
-    
+
     /**
      * Method adds the price details to the record of the price book module
      *
@@ -847,7 +847,7 @@ class ZCRMRecord
     {
         array_push($this->priceDetails, $priceDetail);
     }
-    
+
     /**
      * Method to get the layout of the record
      *
@@ -857,7 +857,7 @@ class ZCRMRecord
     {
         return $this->layout;
     }
-    
+
     /**
      * Method to set the layout
      *
@@ -867,7 +867,7 @@ class ZCRMRecord
     {
         $this->layout = $layout;
     }
-    
+
     /**
      * Method to get the time of last activity on the record
      *
@@ -877,7 +877,7 @@ class ZCRMRecord
     {
         return $this->lastActivityTime;
     }
-    
+
     /**
      * Method to set the time of last activity on the record
      *
